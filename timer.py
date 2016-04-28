@@ -9,12 +9,12 @@ class Timer:
 
     def get_time_hhmmss(self):
         end = time.time()
-        m, s = divmod(end - self.start, 60)
-        h, m = divmod(m, 60)
-        time_str = "%02d:%02d:%02f" % (h, m, s)
+        minutes, seconds = divmod(end - self.start, 60)
+        hours, minutes = divmod(minutes, 60)
+        time_str = "%02d:%02d:%02f" % (hours, minutes, seconds)
         return time_str
 
     def get_seconds(self):
         end = time.time()
-        s = (end - self.start) / 60
-        return s
+        seconds = (end - self.start) / 60
+        return seconds

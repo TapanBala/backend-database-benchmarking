@@ -9,53 +9,53 @@ dbConfig = {
     'charset': 'latin1'
 }
 
-selectObject = "ES"
+selectObject = "url"
 
 tableName = "wp_posts"
 
-queryConfig = (
-    ("id", 15466),
-    ("ES", 1),
-    ("US", 1),
-    ("MX", 0),
-    ("CO", 0),
-    ("special", 0),
-    ("published", "2011-11-08 04:19:18"),
-    ("publishedGreaterThan", "2011-11-08 04:19:18"),
-    ("publishedLessThan", "2011-11-08 04:19:18")
+singleQueryConfig = (
+    ("id",        "=", 15466                ),
+    ("ES",        "=", 1                    ),
+    ("US",        "=", 1                    ),
+    ("MX",        "=", 0                    ),
+    ("CO",        "=", 0                    ),
+    ("special",   "=", 0                    ),
+    ("published", "=", "2011-11-08 04:19:18"),
+    ("published", ">", "2011-11-08 04:19:18"),
+    ("published", "<", "2011-11-08 04:19:18")
 )
-
-whereClauses0 = (
+collectionQueryConfig = []
+collectionQueryConfig.append((
     ("ES",        "=", 1                    ),
     ("US",        "=", 1                    ),
     ("type",      "=", "video"              ),
     ("published", ">", "2011-11-08 04:19:18"),
     ("special",   "=", 1                    )
-)
+))
 
-whereClauses1 = (
+collectionQueryConfig.append((
     ("ES",        "=", 0                    ),
     ("US",        "=", 0                    ),
     ("type",      "=", "slideshow"          ),
     ("published", "<", "2011-11-08 04:19:18"),
     ("special",   "=", 1                    )
-)
+))
 
-whereClauses2 = (
+collectionQueryConfig.append((
     ("ES",        "=", 1                    ),
     ("US",        "=", 0                    ),
     ("type",      "=", "ecommerce"          ),
     ("published", ">", "2013-11-08 04:19:18"),
     ("special",   "=", 0                    )
-)
+))
 
-whereClauses3 = (
+collectionQueryConfig.append((
     ("ES",        "=", 0                    ),
     ("US",        "=", 1                    ),
     ("type",      "=", "brand_article_video"),
     ("published", "<", "2015-11-08 04:19:18"),
     ("special",   "=", 1                    )
-)
+))
 
 limit = 100
 offset = 1345
@@ -65,8 +65,8 @@ def singleQueryProcess():
     cursor = connection.cursor()
     timer = Timer()
     # rowsTraversed = None
-    for clauses in queryConfig:
-        query = queryBuilder.single(selectObject, tableName, clauses[0], clauses[1])
+    for clause in singleQueryConfig:
+        query = queryBuilder.single(selectObject, tableName, clause)
         print("Executing query =====> {}".format(query))
         meanTime = 0
         for executions in range(1, 6):
@@ -102,7 +102,5 @@ def collectionQueryProcess(whereClauses):
 
 singleQueryProcess()
 
-collectionQueryProcess(whereClauses0)
-collectionQueryProcess(whereClauses1)
-collectionQueryProcess(whereClauses2)
-collectionQueryProcess(whereClauses3)
+for whereClauses in collectionQueryConfig:
+    collectionQueryProcess(whereClauses)
