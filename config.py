@@ -67,8 +67,8 @@ collectionQueryConfig = []
 def process():
     for iterations in range(10):
         collectionQueryConfig.append((
-            (countries[randint(0,3)], "=",                        randint(0,1)                                                             ),
-            (countries[randint(0,3)], "=",                        randint(0,1)                                                             ),
+            (countries[randint(0,1)], "=",                        randint(0,1)                                                             ),
+            (countries[randint(2,3)], "=",                        randint(0,1)                                                             ),
             ("type",                  "=",                        postTypes[randint(0,9)]                                                  ),
             ("published",             clauseConfig[randint(0,4)], "{}".format(fake.date_time_between(start_date = "-6y", end_date = "now"))),
             ("special",               "=",                        randint(0,1)                                                             )          
