@@ -1,50 +1,75 @@
 import pymysql.cursors
-from timer import Timer
-import queryBuilder
 import config
+from benchmark import benchmark
+from displayResults import displayResults
 
-def singleQueryProcess():
+def benchmarkConfig1():
     connection = pymysql.connect(**config.dbConfig)
     cursor = connection.cursor()
-    timer = Timer()
-    # rowsTraversed = None
-    for clause in config.singleQueryConfig:
-        query = queryBuilder.single(config.selectProperty, config.tableName, clause)
-        print("Executing query =====> {}".format(query))
-        meanTime = 0
-        for executions in range(1, 6):
-            timer.restart()
-            cursor.execute(query)
-            meanTime += timer.get_seconds()
-        print("Mean query execution time : {:.5f} seconds".format(meanTime / 5))
-        print("")
-        # cursor.execute("desc " + query)
-        # rowsTraversed = cursor.fetchone()[8]
-        # print("Rows Traversed : {}".format(rowsTraversed))
-        # print("=====================================================")
-    connection.close()
 
-def collectionQueryProcess(whereClauses):
-    connection = pymysql.connect(**config.dbConfig)
-    cursor = connection.cursor()
-    timer = Timer()
-    # rowsTraversed = None
-    meanTime = 0
-    query = queryBuilder.collection(config.selectProperty, config.tableName, whereClauses, config.queryRange, config.limit)
-    print("Executing query =====> {}".format(query))
-    for executions in range(1, 6):
-        timer.restart()
+    try:
+        query = "ALTER TABLE post2tag DROP PRIMARY KEY"
         cursor.execute(query)
-        meanTime += timer.get_seconds()
-    print("Mean query execution time : {:.5f} seconds ".format(meanTime / 5))
-    print("")
-    # cursor.execute("desc " + query)
-    # rowsTraversed = cursor.fetchone()[8]
-    # print("Rows Traversed : {}".format(rowsTraversed))
-    # print("=====================================================")
-    connection.close()
+    except Exception as err:
+        print(err)
 
-singleQueryProcess()
+    try:
+        query = "DROP INDEX site_index on wp_posts"
+        cursor.execute(query)
+    except Exception as err:
+        print(err)
 
-for whereClauses in config.collectionQueryConfig:
-    collectionQueryProcess(whereClauses)
+    try:
+        query = "DROP INDEX time_index on wp_posts"
+        cursor.execute(query)
+    except Exception as err:
+        print(err)
+
+    connection.commit()
+
+    benchmark('Config1')
+
+def benchmarkConfig2():
+    connection = pymysql.connect(**config.dbConfig)
+    cursor = connection.cursor()
+
+    try:
+        query = "CREATE INDEX site_index on wp_posts (site)"
+        cursor.execute(query)
+    except Exception as err:
+        print(err)
+
+    try:
+        query = "CREATE INDEX time_index on wp_posts (published)"
+        cursor.execute(query)
+    except Exception as err:
+        print(err)
+
+    connection.commit()
+
+    benchmark('Config2')
+
+def benchmarkConfig3():
+    connection = pymysql.connect(**config.dbConfig)
+    cursor = connection.cursor()
+
+    try:
+        query = "ALTER TABLE post2tag ADD PRIMARY KEY (post_id, tag_id)"
+        cursor.execute(query)
+    except Exception as err:
+        print(err)
+
+    connection.commit()
+
+    benchmark('Config3')
+
+def process():
+    print("=============================== BENCHMARK SUITE COMMENCING ===============================")
+    benchmarkConfig1()
+    benchmarkConfig2()
+    benchmarkConfig3()
+    print("================================= BENCHMARKING COMPLETED =================================\n\n\n\n\n")
+    print("================================== BENCHMARKING RESULTS ==================================")
+    displayResults()
+    
+process()

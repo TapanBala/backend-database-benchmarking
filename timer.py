@@ -11,7 +11,7 @@ class Timer:
         end = time.time()
         minutes, seconds = divmod(end - self.start, 60)
         hours, minutes = divmod(minutes, 60)
-        time_str = "%02d:%02d:%02f" % (hours, minutes, seconds)
+        time_str = "%02d:%02d:%02d" % (hours, minutes, seconds)
         return time_str
 
     def get_seconds(self):
