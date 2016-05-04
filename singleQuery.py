@@ -10,11 +10,11 @@ def singleQuery():
     cursor = connection.cursor()
     timer = Timer()
     meanTime = 0
-    percentConfig = totalRuns/100
+    percentConfig = totalRuns / 100
     print("====================================== Single Query ======================================")
     print("SELECT obj FROM wp_posts WHERE id = post_id AND site = 'blogName';")
     for run in range(totalRuns):
-        postId = randint(1, 60000)
+        postId = randint(1, config.totalPosts)
         query = "SELECT {} FROM wp_posts WHERE id = {}".format(obj, postId)
         timer.restart()
         cursor.execute(query)

@@ -18,4 +18,19 @@ siteConfig = [
     ('yhsJPhKikjHEmoBZxMYB')
 ]
 
+postTypes = [
+    ('normal'),
+    ('ecommerce'),
+    ('slideshow'),
+    ('video'),
+    ('duplicate'),
+    ('branded_club'),
+    ('brand_article'),
+    ('brand_article_video'),
+    ('longform'),
+    ('reposted_slideshow')
+]
+
 executions = 1000
+
+totalPosts = 60000
