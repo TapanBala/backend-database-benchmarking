@@ -1,19 +1,19 @@
-from singleQuery import singleQuery
+from postQuery import postQuery
 from collectionQuery import collectionQuery
-from singleJoinQuery import singleJoinQuery
-from multipleJoinsQueryTypeA import multipleJoinsQueryTypeA
-from multipleJoinsQueryTypeB import multipleJoinsQueryTypeB
+from postsByTagsQuery import postsByTagsQuery
+# from multipleJoinsQueryTypeA import multipleJoinsQueryTypeA
+# from multipleJoinsQueryTypeB import multipleJoinsQueryTypeB
 from timer import Timer
 import json
 
 def benchmark(benchmarkConfig):
     timer = Timer()
     print("======================================= {} ==========================================".format(benchmarkConfig))
-    timeSingle = singleQuery()
+    timePost = postQuery()
     timeCollection =  collectionQuery()
-    timeSingleJoin = singleJoinQuery()
-    timeMultipleJoinA = multipleJoinsQueryTypeA()
-    timeMultipleJoinB = multipleJoinsQueryTypeB()
+    timePostsByTags = postsByTagsQuery()
+    # timeMultipleJoinA = multipleJoinsQueryTypeA()
+    # timeMultipleJoinB = multipleJoinsQueryTypeB()
     print("=================================== {} COMPLETED ====================================".format(benchmarkConfig))
     print("Total Time : {}".format(timer.get_time_hhmmss()))
     json_data = {}
@@ -23,6 +23,7 @@ def benchmark(benchmarkConfig):
     except Exception as err:
         print(err)
     result = json_data
-    result.update({benchmarkConfig:{'single': timeSingle, 'collection': timeCollection, 'singleJoin': timeSingleJoin, 'multipleJoinA': timeMultipleJoinA, 'multipleJoinB': timeMultipleJoinB}})
+    result.update({benchmarkConfig:{'post': timePost, 'collection': timeCollection, 'postsByTags': timePostsByTags}})
+    # result.update({benchmarkConfig:{'post': timePost, 'collection': timeCollection, 'postsByTags': timePostsByTags, 'multipleJoinA': timeMultipleJoinA, 'multipleJoinB': timeMultipleJoinB}})
     with open ('benchmark.json', 'w') as outfile:
         json.dump(result, outfile)

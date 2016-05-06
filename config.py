@@ -31,6 +31,15 @@ postTypes = [
     ('reposted_slideshow')
 ]
 
-executions = 1000
+countries = [
+    ('ES'),
+    ('US'),
+    ('MX'),
+    ('CO')
+]
+
+executions = 100
 
 totalPosts = 60000
+
+totalTags = 100000
