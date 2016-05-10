@@ -1,3 +1,6 @@
+import pymysql.cursors
+
+
 dbConfig = {
     'user'   : 'root',
     'host'   : 'localhost',
@@ -43,3 +46,12 @@ executions = 100
 totalPosts = 60000
 
 totalTags = 100000
+
+def getTags(tags):
+    connection = pymysql.connect(**dbConfig)
+    cursor = connection.cursor()
+    query = " SELECT name FROM wp_tags"
+    cursor.execute(query)
+    results = cursor.fetchall()
+    for tag in range(len(results)):
+        tags.append(results[tag][0])

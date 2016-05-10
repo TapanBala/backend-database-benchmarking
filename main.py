@@ -1,91 +1,49 @@
-import pymysql.cursors
-import config
+import indexBuilder
 from benchmark import benchmark
 from displayResults import displayResults
-
-def dropAllIndex():
-    connection = pymysql.connect(**config.dbConfig)
-    cursor = connection.cursor()
-    try:
-        query = "ALTER TABLE post2tag DROP PRIMARY KEY"
-        cursor.execute(query)
-    except Exception as err:
-        print(err)
-    try:
-        query = "DROP INDEX site_index on wp_posts"
-        cursor.execute(query)
-    except Exception as err:
-        print(err)
-    try:
-        query = "DROP INDEX time_index on wp_posts"
-        cursor.execute(query)
-    except Exception as err:
-        print(err)
-    connection.commit()
+from displayUseCases import displayUseCases
 
 def configIndexAutoIncrement():
-    dropAllIndex()
+    indexBuilder.dropIndex()
     benchmark('Config1')
 
-def configIndexPosts():
-    dropAllIndex()
-    connection = pymysql.connect(**config.dbConfig)
-    cursor = connection.cursor()
-    try:
-        query = "CREATE INDEX site_index on wp_posts (site)"
-        cursor.execute(query)
-    except Exception as err:
-        print(err)
-    try:
-        query = "CREATE INDEX time_index on wp_posts (published)"
-        cursor.execute(query)
-    except Exception as err:
-        print(err)
-    connection.commit()
+def configIndexUrl():
+    indexBuilder.dropIndex()
+    indexBuilder.indexUrl()
     benchmark('Config2')
 
-def configIndexPost2Tag():
-    dropAllIndex()
-    connection = pymysql.connect(**config.dbConfig)
-    cursor = connection.cursor()
-    try:
-        query = "ALTER TABLE post2tag ADD PRIMARY KEY (post_id, tag_id)"
-        cursor.execute(query)
-    except Exception as err:
-        print(err)
-    connection.commit()
+def configIndexPosts():
+    indexBuilder.dropIndex()
+    indexBuilder.indexSite()
+    indexBuilder.indexTime()
+    indexBuilder.indexRank()
     benchmark('Config3')
 
-def configIndexPostsPost2Tag():
-    dropAllIndex()
-    connection = pymysql.connect(**config.dbConfig)
-    cursor = connection.cursor()
-    try:
-        query = "ALTER TABLE post2tag ADD PRIMARY KEY (post_id, tag_id)"
-        cursor.execute(query)
-    except Exception as err:
-        print(err)
-    try:
-        query = "CREATE INDEX site_index on wp_posts (site)"
-        cursor.execute(query)
-    except Exception as err:
-        print(err)
-    try:
-        query = "CREATE INDEX time_index on wp_posts (published)"
-        cursor.execute(query)
-    except Exception as err:
-        print(err)
-    connection.commit()
+def configIndexPost2Tag():
+    indexBuilder.dropIndex()
+    indexBuilder.indexPost2Tag()
     benchmark('Config4')
+
+def configIndexAll():
+    indexBuilder.dropIndex()
+    indexBuilder.indexUrl()
+    indexBuilder.indexSite()
+    indexBuilder.indexTime()
+    indexBuilder.indexRank()
+    indexBuilder.indexPost2Tag()
+    benchmark('Config5')
+
 
 def process():
     print("=============================== BENCHMARK SUITE COMMENCING ===============================")
     configIndexAutoIncrement()
+    configIndexUrl()
     configIndexPosts()
     configIndexPost2Tag()
-    configIndexPostsPost2Tag()
+    configIndexAll()
     print("================================= BENCHMARKING COMPLETED =================================\n\n\n\n\n")
     print("================================== BENCHMARKING RESULTS ==================================")
     displayResults()
+    displayUseCases()
     
 process()

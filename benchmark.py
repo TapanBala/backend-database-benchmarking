@@ -1,19 +1,19 @@
-from postQuery import postQuery
-from collectionQuery import collectionQuery
-from postsByTagsQuery import postsByTagsQuery
-# from multipleJoinsQueryTypeA import multipleJoinsQueryTypeA
-# from multipleJoinsQueryTypeB import multipleJoinsQueryTypeB
+from getPostById import getPostById
+from getPostByUrl import getPostByUrl
+from collectionQuery1 import collectionQuery1
+from collectionQuery2 import collectionQuery2
+from collectionQuery3 import collectionQuery3
 from timer import Timer
 import json
 
 def benchmark(benchmarkConfig):
     timer = Timer()
     print("======================================= {} ==========================================".format(benchmarkConfig))
-    timePost = postQuery()
-    timeCollection =  collectionQuery()
-    timePostsByTags = postsByTagsQuery()
-    # timeMultipleJoinA = multipleJoinsQueryTypeA()
-    # timeMultipleJoinB = multipleJoinsQueryTypeB()
+    timePostById = getPostById()
+    timePostByUrl = getPostByUrl()
+    timeCollection1 =  collectionQuery1()
+    timeCollection2 =  collectionQuery2()
+    timeCollection3 =  collectionQuery3()
     print("=================================== {} COMPLETED ====================================".format(benchmarkConfig))
     print("Total Time : {}".format(timer.get_time_hhmmss()))
     json_data = {}
@@ -23,7 +23,6 @@ def benchmark(benchmarkConfig):
     except Exception as err:
         print(err)
     result = json_data
-    result.update({benchmarkConfig:{'post': timePost, 'collection': timeCollection, 'postsByTags': timePostsByTags}})
-    # result.update({benchmarkConfig:{'post': timePost, 'collection': timeCollection, 'postsByTags': timePostsByTags, 'multipleJoinA': timeMultipleJoinA, 'multipleJoinB': timeMultipleJoinB}})
+    result.update({benchmarkConfig:{'postById': timePostById, 'postByUrl': timePostByUrl, 'collection1': timeCollection1, 'collection2': timeCollection2, 'collection3': timeCollection3}})
     with open ('benchmark.json', 'w') as outfile:
-        json.dump(result, outfile)
+        json.dump(result, outfile, indent = 4)

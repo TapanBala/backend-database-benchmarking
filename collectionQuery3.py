@@ -3,18 +3,22 @@ from timer import Timer
 from random import randint
 import config
 
-def multipleJoinsQueryTypeA():
+def collectionQuery3():
     totalRuns = config.executions
     connection = pymysql.connect(**config.dbConfig)
     cursor = connection.cursor()
     percentConfig = totalRuns / 100
     timer = Timer()
     meanTime = 0
-    print("=============================== Multiple Join Query Type A ===============================")
-    print(" SELECT t.name AS tagname FROM wp_posts AS p LEFT JOIN post2tag AS pt ON p.id = pt.post_id LEFT JOIN wp_tags AS t ON pt.tag_id = t.id WHERE p.id = `postId`;")
+    limit = 20
+    print("=================================== Collection Query 3 ===================================")
+    print(" SELECT id, text, published FROM wp_posts WHERE country = 1 type = 'postType' AND rank < `postRank` AND site = 'site' ORDER BY rank ASC LIMIT 20;")
     for run in range(totalRuns):
-        postId = randint(1, config.totalPosts)
-        query = "SELECT t.{} AS {} FROM wp_posts AS p LEFT JOIN post2tag AS pt ON p.id = pt.post_id LEFT Join wp_tags AS t ON pt.tag_id = t.id WHERE p.id = {}".format('name', 'tagname', postId)
+        postType = config.postTypes[randint(0, 9)]
+        postRank = randint(1, config.totalPosts - 1)
+        country = config.countries[randint(0, 3)]
+        site = config.siteConfig[randint(0, 9)]
+        query = "SELECT id, text, published FROM wp_posts WHERE {} = 1 AND type = '{}' AND rank < {} AND site = '{}' ORDER BY rank ASC LIMIT {}".format(country, postType, postRank, site, limit)
         timer.restart()
         cursor.execute(query)
         meanTime += timer.get_seconds()

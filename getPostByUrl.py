@@ -1,26 +1,23 @@
 import pymysql.cursors
 from timer import Timer
 from random import randint
-from faker import Faker
 import config
 
-def collectionQuery():
-    fake = Faker()
+def getPostByUrl():
     totalRuns = config.executions
     connection = pymysql.connect(**config.dbConfig)
     cursor = connection.cursor()
-    limit = 20
     timer = Timer()
     meanTime = 0
     percentConfig = totalRuns / 100
-    print("==================================== Collection Query ====================================")
-    print("SELECT obj FROM wp_posts WHERE ES = 1 AND published < 'timestamp' AND site = 'blogName' AND type = 'postType' LIMIT 20;")
+    print("=================================== Post By Url Query ====================================")
+    print("SELECT obj FROM wp_posts WHERE url = 'url';")
     for run in range(totalRuns):
-        ES = randint(0, 1)
-        postType = config.postTypes[randint(0, 9)]
-        published = fake.date_time_between(start_date = "-6y", end_date = "now")
-        site = config.siteConfig[randint(0, 9)]
-        query = "SELECT {}, {} FROM wp_posts WHERE ES = {} AND published < '{}' AND site = '{}' AND type = '{}' LIMIT {}".format('id', 'text', ES, published, site, postType, limit)
+        postId = randint(1, config.totalPosts)
+        query = "SELECT url FROM wp_posts WHERE id = {}".format(postId)
+        cursor.execute(query)
+        url = cursor.fetchone()[0]
+        query = "SELECT text, id FROM wp_posts WHERE url = '{}'".format(url)
         timer.restart()
         cursor.execute(query)
         meanTime += timer.get_seconds()

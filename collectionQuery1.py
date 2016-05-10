@@ -4,7 +4,7 @@ from random import randint
 from faker import Faker
 import config
 
-def postsByTagsQuery():
+def collectionQuery1():
     fake = Faker()
     totalRuns = config.executions
     connection = pymysql.connect(**config.dbConfig)
@@ -13,13 +13,14 @@ def postsByTagsQuery():
     meanTime = 0
     limit = 20
     percentConfig = totalRuns / 100
-    print("================================== Posts by Tags Query ===================================")
-    print("SELECT p.id AS postId, p.text AS postText FROM post2tag AS pt LEFT JOIN wp_posts AS p ON pt.post_id = p.id AND p.country = 1 AND p.published < 'timestamp' WHERE pt.tag_id = `tagId` LIMIT 20;")
+    print("=================================== Collection Query 1 ===================================")
+    print("SELECT p.id AS postId, p.text AS postText FROM post2tag AS pt LEFT JOIN wp_posts AS p ON pt.post_id = p.id AND p.country = 1 AND p.published < 'timestamp' AND p.site = 'site' WHERE pt.tag_id = `tagId` ORDER BY published DESC LIMIT 20;")
     for run in range(totalRuns):
         tagId = randint(1, config.totalTags)
         published = fake.date_time_between(start_date = "-6y", end_date = "now")
         country = config.countries[randint(0, 3)]
-        query = "SELECT p.{} AS {}, p.{} AS {} FROM post2tag AS pt LEFT JOIN wp_posts AS p ON pt.post_id = p.id AND p.{} = 1 AND p.published < '{}' WHERE pt.tag_id = {} LIMIT {}".format('id', 'postId', 'text', 'postText', country, published, tagId, limit)
+        site = config.siteConfig[randint(0, 9)]
+        query = "SELECT p.id AS postId, p.text AS postText FROM post2tag AS pt LEFT JOIN wp_posts AS p ON pt.post_id = p.id AND p.{} = 1 AND p.published < '{}' AND p.site = '{}' WHERE pt.tag_id = {} ORDER BY published DESC LIMIT {}".format(country, published, site, tagId, limit)
         timer.restart()
         cursor.execute(query)
         meanTime += timer.get_seconds()

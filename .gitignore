@@ -1,5 +1,4 @@
 __pycache__
 test.sublime-workspace
 testCaseScenarios
-multipleJoinsQueryTypeA.py
-multipleJoinsQueryTypeB.py
+displayFormattedResults.py
