@@ -45,33 +45,39 @@ def displayResults():
     |                   |                   |                   |                   |                   |                   |
     |___________________|___________________|___________________|___________________|___________________|___________________|
     """.format(
-        result['Config1']['postById'],
-        result['Config2']['postById'],
-        result['Config3']['postById'],
-        result['Config4']['postById'],
-        result['Config5']['postById'],
+        result['Config1']['postById'] * 1000000,
+        result['Config2']['postById'] * 1000000,
+        result['Config3']['postById'] * 1000000,
+        result['Config4']['postById'] * 1000000,
+        result['Config5']['postById'] * 1000000,
 
-        result['Config1']['postByUrl'],
-        result['Config2']['postByUrl'],
-        result['Config3']['postByUrl'],
-        result['Config4']['postByUrl'],
-        result['Config5']['postByUrl'],
+        "\N{micro sign}s",
+        "\N{micro sign}s",
+        "\N{micro sign}s",
+        "\N{micro sign}s",
+        "\N{micro sign}s",
 
-        result['Config1']['collection1'],
-        result['Config2']['collection1'],
-        result['Config3']['collection1'],
-        result['Config4']['collection1'],
-        result['Config5']['collection1'],
+        result['Config1']['postByUrl'] * 1000,
+        result['Config2']['postByUrl'] * 1000,
+        result['Config3']['postByUrl'] * 1000,
+        result['Config4']['postByUrl'] * 1000,
+        result['Config5']['postByUrl'] * 1000,
 
-        result['Config1']['collection2'],
-        result['Config2']['collection2'],
-        result['Config3']['collection2'],
-        result['Config4']['collection2'],
-        result['Config5']['collection2'],
-        
-        result['Config1']['collection3'],
-        result['Config2']['collection3'],
-        result['Config3']['collection3'],
-        result['Config4']['collection3'],
-        result['Config5']['collection3'])
+        result['Config1']['collection1'] * 1000,
+        result['Config2']['collection1'] * 1000,
+        result['Config3']['collection1'] * 1000,
+        result['Config4']['collection1'] * 1000,
+        result['Config5']['collection1'] * 1000,
+
+        result['Config1']['collection2'] * 1000,
+        result['Config2']['collection2'] * 1000,
+        result['Config3']['collection2'] * 1000,
+        result['Config4']['collection2'] * 1000,
+        result['Config5']['collection2'] * 1000,
+
+        result['Config1']['collection3'] * 1000,
+        result['Config2']['collection3'] * 1000,
+        result['Config3']['collection3'] * 1000,
+        result['Config4']['collection3'] * 1000,
+        result['Config5']['collection3'] * 1000)
     print(output)
