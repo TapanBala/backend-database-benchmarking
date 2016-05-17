@@ -1,6 +1,7 @@
 import indexBuilder
 from benchmark import benchmark
-from displayResults import displayResults
+# from displayResults import displayResults
+from displayFormattedResults import displayFormattedResults
 from displayUseCases import displayUseCases
 
 def configIndexAutoIncrement():

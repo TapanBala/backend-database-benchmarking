@@ -21,7 +21,7 @@ def collectionQuery1():
         tagName = tags[randint(0, config.totalTags - 1)]
         published = fake.date_time_between(start_date = "-6y", end_date = "now")
         country = config.countries[randint(0, 3)]
-        site = config.siteConfig[randint(0, 9)]
+        site = config.siteConfig[randint(0, 19)]
         query = "SELECT p.id, p.text FROM wp_tags AS t LEFT JOIN post2tag AS pt ON t.id = pt.tag_id AND t.name = '{}' LEFT JOIN wp_posts AS p ON pt.post_id = p.id WHERE p.site = '{}' AND p.{} = 1 AND p.published < '{}' ORDER BY published DESC LIMIT {}".format(tagName, site, country, published, limit)
         timer.restart()
         cursor.execute(query)

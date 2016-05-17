@@ -17,7 +17,7 @@ def collectionQuery3():
         postType = config.postTypes[randint(0, 9)]
         postRank = randint(1, config.totalPosts - 1)
         country = config.countries[randint(0, 3)]
-        site = config.siteConfig[randint(0, 9)]
+        site = config.siteConfig[randint(0, 19)]
         query = "SELECT id, text, published FROM wp_posts WHERE {} = 1 AND type = '{}' AND rank < {} AND site = '{}' ORDER BY rank DESC LIMIT {}".format(country, postType, postRank, site, limit)
         timer.restart()
         cursor.execute(query)

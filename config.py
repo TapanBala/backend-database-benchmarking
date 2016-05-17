@@ -1,23 +1,34 @@
 import pymysql.cursors
 
 dbConfig = {
-    'user'    : 'root',
-    'host'    : 'localhost',
-    'db'      : 'benchmark',
-    'charset' : 'latin1'
+    'user'     : 'root',
+    'host'     : 'localhost',
+    'db'       : 'benchmark',
+    'password' : '12345',
+    'charset'  : 'latin1'
 }
 
 siteConfig = [
-    ('BwUTGoeJcBsRQcAsPNxo'),
-    ('umbFWWpoBgyWbfHRBmvY'),
-    ('fqVPpMozrPkXjaLXvijA'),
-    ('BJlwXHlwfUdKFDlqKQTv'),
-    ('DQsBnqOHtCcqxFITcbjq'),
-    ('iGcOTClVXTShmthgyims'),
-    ('IqnvMHfzXxXfPHgGnlwD'),
-    ('CiShLxZUNJcCwuxXaxrG'),
-    ('bMHtmgvOABkTqUjcTOBW'),
-    ('yhsJPhKikjHEmoBZxMYB')
+    ('bRbZFQuTlLqeAPEzsKNn'),
+    ('BsXZeZsWamCxEXZGDRmI'),
+    ('CGJCwLYxqoBGWHdCjUEn'),
+    ('cxkDjZrJcJhdATciWsfq'),
+    ('dpwoAPWJouJLawqpofGe'),
+    ('fitFVWLMDiyHrGrUFyBp'),
+    ('jlbROUciOppHnvlHQvXK'),
+    ('jpNYOPbimHUxIInXqDwJ'),
+    ('kKZtpQiZvlNcyywLDOQs'),
+    ('ldqBJOuApYwThqfDTrpP'),
+    ('lrubOlLWFBMoagixkFTY'),
+    ('PamyjLfDBUuMSBIvEIWp'),
+    ('RiLkBRYmWFHcrhcUxLlv'),
+    ('TylwMuLTRwoEpuZRuHJp'),
+    ('uQfufeJsdgkKoJIsbWqs'),
+    ('USqCQbpCwMHXaXJGnrBf'),
+    ('uwtSAGdxAczkVCxJVCSY'),
+    ('VNEKgWmcQszHnhohDKSt'),
+    ('XbqOzjKzOaxxJTLmRxZk'),
+    ('YQikiApCGNuVQVkxDQwR')
 ]
 
 postTypes = [

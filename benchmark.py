@@ -11,9 +11,9 @@ def benchmark(benchmarkConfig):
     print("======================================= {} ==========================================".format(benchmarkConfig))
     timePostById = getPostById()
     timePostByUrl = getPostByUrl()
-    timeCollection1 =  collectionQuery1()
-    timeCollection2 =  collectionQuery2()
-    timeCollection3 =  collectionQuery3()
+    timeCollection1 = collectionQuery1()
+    timeCollection2 = collectionQuery2()
+    timeCollection3 = collectionQuery3()
     print("=================================== {} COMPLETED ====================================".format(benchmarkConfig))
     print("Total Time : {}".format(timer.get_time_hhmmss()))
     json_data = {}
