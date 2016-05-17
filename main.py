@@ -14,9 +14,8 @@ def configIndexUrl():
 
 def configIndexPosts():
     indexBuilder.dropIndex()
-    indexBuilder.indexSite()
+    indexBuilder.indexSiteRank()
     indexBuilder.indexTime()
-    indexBuilder.indexRank()
     benchmark('Config3')
 
 def configIndexPost2Tag():
@@ -27,12 +26,10 @@ def configIndexPost2Tag():
 def configIndexAll():
     indexBuilder.dropIndex()
     indexBuilder.indexUrl()
-    indexBuilder.indexSite()
+    indexBuilder.indexSiteRank()
     indexBuilder.indexTime()
-    indexBuilder.indexRank()
     indexBuilder.indexPost2Tag()
     benchmark('Config5')
-
 
 def process():
     print("=============================== BENCHMARK SUITE COMMENCING ===============================")

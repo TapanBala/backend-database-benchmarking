@@ -12,10 +12,10 @@ def displayUseCases():
 		SELECT obj FROM table WHERE country = 'x' AND tag = 'y' AND published < 'timestamp' AND site = 'site' ORDER BY published DESC LIMIT 20
 
 	4. Collection Query 2
-		SELECT obj FROM table WHERE country = 'x' AND tag = 'y' AND rank < `postRank` AND site = `site` ORDER BY rank ASC LIMIT 20
+		SELECT obj FROM table WHERE country = 'x' AND tag = 'y' AND rank < `postRank` AND site = `site` ORDER BY rank DESC LIMIT 20
 
 	5. Collection Query 3
-		SELECT obj FROM table WHERE country = 'x' AND type = 'postType' AND rank < `postRank` AND site = 'site' ORDER BY rank ASC LIMIT 20
+		SELECT obj FROM table WHERE country = 'x' AND type = 'postType' AND rank < `postRank` AND site = 'site' ORDER BY rank DESC LIMIT 20
 
 	"""
 	print(output)

@@ -1,11 +1,10 @@
 import pymysql.cursors
 
-
 dbConfig = {
-    'user'   : 'root',
-    'host'   : 'localhost',
-    'db'     : 'test',
-    'charset': 'latin1'
+    'user'    : 'root',
+    'host'    : 'localhost',
+    'db'      : 'benchmark',
+    'charset' : 'latin1'
 }
 
 siteConfig = [
@@ -43,7 +42,7 @@ countries = [
 
 executions = 100
 
-totalPosts = 60000
+totalPosts = 5000000
 
 totalTags = 100000
 

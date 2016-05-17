@@ -2,6 +2,12 @@ import pymysql.cursors
 import config
 
 def dropIndex():
+    dropPost2Tag()
+    dropTimeIndex()
+    dropRankIndex()
+    dropSiteRankIndex()
+
+def dropPost2TagIndex():
     connection = pymysql.connect(**config.dbConfig)
     cursor = connection.cursor()
     try:
@@ -9,23 +15,33 @@ def dropIndex():
         cursor.execute(query)
     except Exception as err:
         print(err)
-    try:
-        query = "DROP INDEX url_index on wp_posts"
-        cursor.execute(query)
-    except Exception as err:
-        print(err)
-    try:
-        query = "DROP INDEX site_index on wp_posts"
-        cursor.execute(query)
-    except Exception as err:
-        print(err)
+    connection.commit()
+
+def dropTimeIndex():
+    connection = pymysql.connect(**config.dbConfig)
+    cursor = connection.cursor()
     try:
         query = "DROP INDEX time_index on wp_posts"
         cursor.execute(query)
     except Exception as err:
         print(err)
+    connection.commit()
+
+def dropRankIndex():
+    connection = pymysql.connect(**config.dbConfig)
+    cursor = connection.cursor()
     try:
         query = "DROP INDEX rank_index on wp_posts"
+        cursor.execute(query)
+    except Exception as err:
+        print(err)
+    connection.commit()
+
+def dropSiteRankIndex():
+    connection = pymysql.connect(**config.dbConfig)
+    cursor = connection.cursor()
+    try:
+        query = "DROP INDEX compk_siterank on wp_posts"
         cursor.execute(query)
     except Exception as err:
         print(err)
@@ -41,31 +57,11 @@ def indexUrl():
         print(err)
     connection.commit()
 
-def indexSite():
-    connection = pymysql.connect(**config.dbConfig)
-    cursor = connection.cursor()
-    try:
-        query = "CREATE INDEX site_index on wp_posts (site)"
-        cursor.execute(query)
-    except Exception as err:
-        print(err)
-    connection.commit()
-
 def indexTime():
     connection = pymysql.connect(**config.dbConfig)
     cursor = connection.cursor()
     try:
         query = "CREATE INDEX time_index on wp_posts (published)"
-        cursor.execute(query)
-    except Exception as err:
-        print(err)
-    connection.commit()
-
-def indexRank():
-    connection = pymysql.connect(**config.dbConfig)
-    cursor = connection.cursor()
-    try:
-        query = "CREATE INDEX rank_index on wp_posts (rank)"
         cursor.execute(query)
     except Exception as err:
         print(err)
@@ -80,3 +76,13 @@ def indexPost2Tag():
     except Exception as err:
         print(err)
     connection.commit()
+
+def indexSiteRank():
+    connection = pymysql.connect(**config.dbConfig)
+    cursor = connection.cursor()
+    try:
+        query = "ALTER TABLE wp_posts ADD CONSTRAINT compk_siterank UNIQUE (site, rank)"
+        cursor.execute(query)
+    except Exception as err:
+        print(err)
+    connection.commit()    

@@ -16,13 +16,13 @@ def collectionQuery2():
     tags = []
     config.getTags(tags)
     print("=================================== Collection Query 2 ===================================")
-    print("SELECT p.id AS postId, p.text AS postText, p.published AS datePublished FROM wp_tags AS t LEFT JOIN post2tag AS pt ON t.id = pt.tag_id AND t.name = 'tagName' LEFT JOIN wp_posts AS p ON pt.post_id = p.id WHERE p.country = 1 AND p.rank < `postRank` AND p.site = `site` ORDER BY rank ASC LIMIT 20;")
+    print("SELECT p.id, p.text, p.published FROM wp_tags AS t LEFT JOIN post2tag AS pt ON t.id = pt.tag_id AND t.name = 'tagName' LEFT JOIN wp_posts AS p ON pt.post_id = p.id WHERE p.site = `site` AND p.country = 1 AND p.rank < `postRank` ORDER BY rank DESC LIMIT 20;")
     for run in range(totalRuns):
         tagName = tags[randint(0, config.totalTags - 1)]
         postRank = randint(1, config.totalPosts)
         site = config.siteConfig[randint(0, 9)]
         country = config.countries[randint(0, 3)]
-        query = "SELECT p.id AS postId, p.text AS postText, p.published AS datePublished FROM wp_tags AS t LEFT JOIN post2tag AS pt ON t.id = pt.tag_id AND t.name = '{}' LEFT JOIN wp_posts AS p ON pt.post_id = p.id WHERE p.{} = 1 AND p.rank < {} AND p.site = '{}' ORDER BY rank ASC LIMIT {}".format(tagName, country, postRank, site, limit)
+        query = "SELECT p.id, p.text, p.published FROM wp_tags AS t LEFT JOIN post2tag AS pt ON t.id = pt.tag_id AND t.name = '{}' LEFT JOIN wp_posts AS p ON pt.post_id = p.id WHERE p.site = '{}' AND p.{} = 1 AND p.rank < {} ORDER BY rank DESC LIMIT {}".format(tagName, site, country, postRank, limit)
         timer.restart()
         cursor.execute(query)
         meanTime += timer.get_seconds()

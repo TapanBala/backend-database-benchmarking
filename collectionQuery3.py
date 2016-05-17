@@ -12,13 +12,13 @@ def collectionQuery3():
     meanTime = 0
     limit = 20
     print("=================================== Collection Query 3 ===================================")
-    print(" SELECT id, text, published FROM wp_posts WHERE country = 1 type = 'postType' AND rank < `postRank` AND site = 'site' ORDER BY rank ASC LIMIT 20;")
+    print(" SELECT id, text, published FROM wp_posts WHERE country = 1 type = 'postType' AND rank < `postRank` AND site = 'site' ORDER BY rank DESC LIMIT 20;")
     for run in range(totalRuns):
         postType = config.postTypes[randint(0, 9)]
         postRank = randint(1, config.totalPosts - 1)
         country = config.countries[randint(0, 3)]
         site = config.siteConfig[randint(0, 9)]
-        query = "SELECT id, text, published FROM wp_posts WHERE {} = 1 AND type = '{}' AND rank < {} AND site = '{}' ORDER BY rank ASC LIMIT {}".format(country, postType, postRank, site, limit)
+        query = "SELECT id, text, published FROM wp_posts WHERE {} = 1 AND type = '{}' AND rank < {} AND site = '{}' ORDER BY rank DESC LIMIT {}".format(country, postType, postRank, site, limit)
         timer.restart()
         cursor.execute(query)
         meanTime += timer.get_seconds()
