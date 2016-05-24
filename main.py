@@ -1,7 +1,6 @@
 import indexBuilder
 from benchmark import benchmark
-# from displayResults import displayResults
-from displayFormattedResults import displayFormattedResults
+from displayResults import displayResults
 from displayUseCases import displayUseCases
 
 def configIndexAutoIncrement():
@@ -9,27 +8,28 @@ def configIndexAutoIncrement():
     benchmark('Config1')
 
 def configIndexUrl():
-    indexBuilder.dropIndex()
     indexBuilder.indexUrl()
     benchmark('Config2')
 
 def configIndexPosts():
-    indexBuilder.dropIndex()
-    indexBuilder.indexSiteRank()
-    indexBuilder.indexTime()
+    indexBuilder.dropUrlIndex()
+    indexBuilder.indexTagQuery("tag_query1")
+    indexBuilder.indexTagQuery("tag_query2")
+    indexBuilder.indexTagQuery("tag_query3")
     benchmark('Config3')
 
 def configIndexPost2Tag():
-    indexBuilder.dropIndex()
+    indexBuilder.dropTagQueryIndex("tag_query1")
+    indexBuilder.dropTagQueryIndex("tag_query2")
+    indexBuilder.dropTagQueryIndex("tag_query3")
     indexBuilder.indexPost2Tag()
     benchmark('Config4')
 
 def configIndexAll():
-    indexBuilder.dropIndex()
     indexBuilder.indexUrl()
-    indexBuilder.indexSiteRank()
-    indexBuilder.indexTime()
-    indexBuilder.indexPost2Tag()
+    indexBuilder.indexTagQuery("tag_query1")
+    indexBuilder.indexTagQuery("tag_query2")
+    indexBuilder.indexTagQuery("tag_query3")
     benchmark('Config5')
 
 def process():

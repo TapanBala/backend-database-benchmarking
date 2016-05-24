@@ -10,10 +10,14 @@ def benchmark(benchmarkConfig):
     timer = Timer()
     print("======================================= {} ==========================================".format(benchmarkConfig))
     timePostById = getPostById()
-    timePostByUrl = getPostByUrl()
+    if (benchmarkConfig == 'Config2') | (benchmarkConfig == 'Config5'):
+        timePostByUrl = getPostByUrl()
+    else:
+        timePostByUrl = 0
     timeCollection1 = collectionQuery1()
     timeCollection2 = collectionQuery2()
     timeCollection3 = collectionQuery3()
+
     print("=================================== {} COMPLETED ====================================".format(benchmarkConfig))
     print("Total Time : {}".format(timer.get_time_hhmmss()))
     json_data = {}
@@ -26,3 +30,5 @@ def benchmark(benchmarkConfig):
     result.update({benchmarkConfig:{'postById': timePostById, 'postByUrl': timePostByUrl, 'collection1': timeCollection1, 'collection2': timeCollection2, 'collection3': timeCollection3}})
     with open ('benchmark.json', 'w') as outfile:
         json.dump(result, outfile, indent = 4)
+
+

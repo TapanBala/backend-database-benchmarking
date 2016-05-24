@@ -9,20 +9,20 @@ def displayResults():
 
     _________________________________________________________________________________________________________________________
     |Configurations ==> |                   |                   |                   |                   |                   |
-    |                   | 1. Only Indexed   | 2. Indexing of    | 3. Indexing of    | 4. Indexing of    | 5. Indexing with  |
-    |Queries            |    PRIMARY KEY    |    url field      |    published,     |    post2tag table |       Config      |
-    |  ||               |   (AUTO INCREMENT)|                   |    site & rank    |   (COMPOSITE KEY) |    (2 + 3 + 4)    |
-    |  VV               |                   |                   |      fields       |                   |                   |
+    |                   | 1. Only Indexed   | 2. Indexing of    | 3. Indexing of    | 4. Indexing of    | 5. Indexing of    |
+    |Queries            |    PRIMARY KEY    |    url field      |    published,     |    post2tag table |    all tables     |
+    |  ||               |   (AUTO INCREMENT)|    (wp_posts)     |    site & rank    |   (COMPOSITE KEY) |     (1+2+3+4)     |
+    |  VV               |                   |                   |    fields         |                   |                   |
     |-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|
     |                   |                   |                   |                   |                   |                   |
     |                   |                   |                   |                   |                   |                   |
     |  1. Post By Id    |    {:^11.7f}    |    {:^11.7f}    |    {:^11.7f}    |    {:^11.7f}    |    {:^11.7f}    |
-    |                   |        {}         |        {}         |        {}         |        {}         |        {}         |
+    |                   |        ms         |        ms         |        ms         |        ms         |        ms         |
     |                   |                   |                   |                   |                   |                   |
     |-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|
     |                   |                   |                   |                   |                   |                   |
     |                   |                   |                   |                   |                   |                   |
-    |  2. Post By Url   |    {:^11.7f}    |    {:^11.7f}    |    {:^11.7f}    |    {:^11.7f}    |    {:^11.7f}    |
+    |  2. Post By Url   |        -          |    {:^11.7f}    |        -          |        -          |    {:^11.7f}    |
     |                   |        ms         |        ms         |        ms         |        ms         |        ms         |
     |                   |                   |                   |                   |                   |                   |
     |-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|
@@ -45,22 +45,13 @@ def displayResults():
     |                   |                   |                   |                   |                   |                   |
     |___________________|___________________|___________________|___________________|___________________|___________________|
     """.format(
-        result['Config1']['postById'] * 1000000,
-        result['Config2']['postById'] * 1000000,
-        result['Config3']['postById'] * 1000000,
-        result['Config4']['postById'] * 1000000,
-        result['Config5']['postById'] * 1000000,
+        result['Config1']['postById'] * 1000,
+        result['Config2']['postById'] * 1000,
+        result['Config3']['postById'] * 1000,
+        result['Config4']['postById'] * 1000,
+        result['Config5']['postById'] * 1000,
 
-        "\N{micro sign}s",
-        "\N{micro sign}s",
-        "\N{micro sign}s",
-        "\N{micro sign}s",
-        "\N{micro sign}s",
-
-        result['Config1']['postByUrl'] * 1000,
         result['Config2']['postByUrl'] * 1000,
-        result['Config3']['postByUrl'] * 1000,
-        result['Config4']['postByUrl'] * 1000,
         result['Config5']['postByUrl'] * 1000,
 
         result['Config1']['collection1'] * 1000,

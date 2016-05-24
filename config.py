@@ -3,32 +3,32 @@ import pymysql.cursors
 dbConfig = {
     'user'     : 'root',
     'host'     : 'localhost',
-    'db'       : 'benchmark',
+    'db'       : 'bench',
     'password' : '12345',
     'charset'  : 'latin1'
 }
 
 siteConfig = [
-    ('bRbZFQuTlLqeAPEzsKNn'),
-    ('BsXZeZsWamCxEXZGDRmI'),
-    ('CGJCwLYxqoBGWHdCjUEn'),
-    ('cxkDjZrJcJhdATciWsfq'),
-    ('dpwoAPWJouJLawqpofGe'),
-    ('fitFVWLMDiyHrGrUFyBp'),
-    ('jlbROUciOppHnvlHQvXK'),
-    ('jpNYOPbimHUxIInXqDwJ'),
-    ('kKZtpQiZvlNcyywLDOQs'),
-    ('ldqBJOuApYwThqfDTrpP'),
-    ('lrubOlLWFBMoagixkFTY'),
-    ('PamyjLfDBUuMSBIvEIWp'),
-    ('RiLkBRYmWFHcrhcUxLlv'),
-    ('TylwMuLTRwoEpuZRuHJp'),
-    ('uQfufeJsdgkKoJIsbWqs'),
-    ('USqCQbpCwMHXaXJGnrBf'),
-    ('uwtSAGdxAczkVCxJVCSY'),
-    ('VNEKgWmcQszHnhohDKSt'),
-    ('XbqOzjKzOaxxJTLmRxZk'),
-    ('YQikiApCGNuVQVkxDQwR')
+    ('BedDVtNwjVuyJviMStOf'),
+    ('bRlWPxcyefwOBOXhQBSi'),
+    ('CrfGHAEPcaTOblQDrhIR'),
+    ('hMsOfgtHHnAkmTfHBXmk'),
+    ('KjpkrqhUIuPfJSDmvxrJ'),
+    ('PsZHKBevUICySgEicTWw'),
+    ('raLVKYBXzdtbnbxdCkEj'),
+    ('RlMbEDQmlVeypfpwgzzY'),
+    ('rnrqEOtlEawLxyVmPOZr'),
+    ('sTbFhWNKCnhboxrLuQBv'),
+    ('UaMGFivyPFsIOzxsXszf'),
+    ('urFbELVPCkayhBxsMXqS'),
+    ('uWezTnKSFVXopubsxBTQ'),
+    ('UxjfKViZKqDQbkbtpGtE'),
+    ('UYWYDLlxoSdruHmWvizB'),
+    ('vxCASAfDoJyBArBKpcqd'),
+    ('wjhLBCoOaSiQQfOqhVLl'),
+    ('wLwiBeolzmFLeGfdGTKd'),
+    ('XgsGyYVEnAackRJxYwKl'),
+    ('xlKjaFvrTkVDDiqtHmpA')
 ]
 
 postTypes = [
@@ -53,7 +53,7 @@ countries = [
 
 executions = 100
 
-totalPosts = 5000000
+totalPosts = 1000000
 
 totalTags = 100000
 

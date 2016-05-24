@@ -12,13 +12,13 @@ def collectionQuery3():
     meanTime = 0
     limit = 20
     print("=================================== Collection Query 3 ===================================")
-    print(" SELECT id, text, published FROM wp_posts WHERE country = 1 type = 'postType' AND rank < `postRank` AND site = 'site' ORDER BY rank DESC LIMIT 20;")
+    print(" SELECT text_id AS id, p_text AS text, p_published AS published FROM tag_query3 LEFT JOIN text ON text_id = text.id WHERE p_country = 1 p_type = 'postType' AND p_rank < `postRank` AND p_site = 'site' ORDER BY p_rank DESC LIMIT 20;")
     for run in range(totalRuns):
         postType = config.postTypes[randint(0, 9)]
         postRank = randint(1, config.totalPosts - 1)
         country = config.countries[randint(0, 3)]
         site = config.siteConfig[randint(0, 19)]
-        query = "SELECT id, text, published FROM wp_posts WHERE {} = 1 AND type = '{}' AND rank < {} AND site = '{}' ORDER BY rank DESC LIMIT {}".format(country, postType, postRank, site, limit)
+        query = "SELECT text_id AS id, p_text AS text, p_published AS published FROM tag_query3 LEFT JOIN text ON text_id = text.id WHERE p_{} = 1 AND p_type = '{}' AND p_rank < {} AND p_site = '{}' ORDER BY p_rank DESC LIMIT {}".format(country, postType, postRank, site, limit)
         timer.restart()
         cursor.execute(query)
         meanTime += timer.get_seconds()
@@ -28,4 +28,8 @@ def collectionQuery3():
     print("Completed 100 %")
     print("Mean query execution time : {:.10f} seconds".format(meanTime / totalRuns))
     connection.close()
+    print("")
+    print("Example Query")
+    print(query)
+    print("")
     return meanTime / totalRuns

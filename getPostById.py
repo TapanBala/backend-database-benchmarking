@@ -11,7 +11,7 @@ def getPostById():
     meanTime = 0
     percentConfig = totalRuns / 100
     print("==================================== Post By Id Query ====================================")
-    print("SELECT obj FROM wp_posts USE INDEX (PRIMARY) WHERE id = post_id;")
+    print("SELECT obj FROM wp_posts WHERE id = post_id;")
     for run in range(totalRuns):
         postId = randint(1, config.totalPosts)
         query = "SELECT {} FROM wp_posts WHERE id = {}".format('text', postId)
@@ -24,4 +24,8 @@ def getPostById():
     print("Completed 100 %")
     print("Mean query execution time : {:.10f} seconds".format(meanTime / totalRuns))
     connection.close()
+    print("")
+    print("Example Query")
+    print(query)
+    print("")
     return meanTime / totalRuns

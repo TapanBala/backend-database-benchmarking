@@ -27,4 +27,8 @@ def getPostByUrl():
     print("Completed 100 %")
     print("Mean query execution time : {:.10f} seconds".format(meanTime / totalRuns))
     connection.close()
+    print("")
+    print("Example Query")
+    print(query)
+    print("")
     return meanTime / totalRuns
